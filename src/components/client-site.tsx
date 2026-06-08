@@ -23,6 +23,14 @@ type Props = {
   site: SiteVariant;
 };
 
+function assetPath(src: string) {
+  if (!src.startsWith("/")) {
+    return src;
+  }
+
+  return `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${src}`;
+}
+
 export function ClientSite({ site }: Props) {
   const themeVars = {
     "--brand": site.theme.brand,
@@ -99,7 +107,7 @@ function Hero({ site, telHref }: { site: SiteVariant; telHref: string }) {
         <div className="max-w-5xl">
           <h1 className="sr-only">{site.name}</h1>
           <Image
-            src="/gentlemans-club-logo-gold.png"
+            src={assetPath("/gentlemans-club-logo-gold.png")}
             alt=""
             width={2000}
             height={563}
@@ -217,7 +225,7 @@ function Gallery({ site }: { site: SiteVariant }) {
               } ${index >= 2 ? "aspect-[3/4] md:aspect-auto" : "aspect-[4/3] md:aspect-auto"}`}
             >
               <Image
-                src={image.src}
+                src={assetPath(image.src)}
                 alt={image.alt}
                 fill
                 sizes={index === 0 || index === 1 ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 768px) 25vw, 100vw"}
