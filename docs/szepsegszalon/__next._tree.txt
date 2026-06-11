@@ -1,2 +1,2 @@
-:HL["/Gentlemans/_next/static/css/1460d859db475444.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"szepsegszalon","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"zpaU0D0DdF8PY6c1t_Oi1"}
+:HL["/Gentlemans/_next/static/css/d8748ab82666714c.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"szepsegszalon","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"FJore8OdNq7-6kI2qRje9"}

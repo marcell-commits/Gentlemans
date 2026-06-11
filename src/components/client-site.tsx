@@ -32,6 +32,14 @@ function assetPath(src: string) {
   return `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${src}`;
 }
 
+function facebookEmbedUrl(src: string, width: number) {
+  if (/[?&]width=\d+/.test(src)) {
+    return src.replace(/([?&]width=)\d+/, `$1${width}`);
+  }
+
+  return `${src}${src.includes("?") ? "&" : "?"}width=${width}`;
+}
+
 export function ClientSite({ site }: Props) {
   const themeVars = {
     "--brand": site.theme.brand,
@@ -325,7 +333,7 @@ function MapSection({ site }: { site: SiteVariant }) {
 
 function Contact({ site, telHref }: { site: SiteVariant; telHref: string }) {
   return (
-    <section id="kapcsolat" className="bg-ink px-5 py-20 text-white sm:px-6 md:py-28 lg:px-8">
+    <section id="kapcsolat" className="overflow-hidden bg-ink px-5 py-20 text-white sm:px-6 md:py-28 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <p className="text-sm font-semibold text-accent">Kapcsolat</p>
@@ -334,40 +342,40 @@ function Contact({ site, telHref }: { site: SiteVariant; telHref: string }) {
             Az online foglalási rendszerben néhány kattintással kiválaszthatod a számodra megfelelő szolgáltatást és időpontot.
           </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid min-w-0 gap-4 sm:grid-cols-2">
           <a
             href={telHref}
-            className="rounded-lg border border-white/[0.12] bg-white/[0.05] p-6 transition hover:bg-white/[0.09] focus:outline-none focus:ring-2 focus:ring-white/70"
+            className="min-w-0 rounded-lg border border-white/[0.12] bg-white/[0.05] p-5 transition hover:bg-white/[0.09] focus:outline-none focus:ring-2 focus:ring-white/70 sm:p-6"
           >
             <Phone aria-hidden="true" className="mb-8 text-accent" size={24} />
             <p className="text-sm text-white/[0.54]">Telefon</p>
-            <p className="mt-2 text-2xl font-semibold">{site.phone}</p>
+            <p className="mt-2 text-xl font-semibold sm:text-2xl">{site.phone}</p>
           </a>
           {site.email ? (
             <a
               href={`mailto:${site.email}`}
-              className="rounded-lg border border-white/[0.12] bg-white/[0.05] p-6 transition hover:bg-white/[0.09] focus:outline-none focus:ring-2 focus:ring-white/70"
+              className="min-w-0 rounded-lg border border-white/[0.12] bg-white/[0.05] p-5 transition hover:bg-white/[0.09] focus:outline-none focus:ring-2 focus:ring-white/70 sm:p-6"
             >
               <Mail aria-hidden="true" className="mb-8 text-accent" size={24} />
               <p className="text-sm text-white/[0.54]">E-mail</p>
-              <p className="mt-2 break-words text-2xl font-semibold leading-tight">{site.email}</p>
+              <p className="mt-2 min-w-0 break-all text-xl font-semibold leading-tight sm:text-2xl">{site.email}</p>
             </a>
           ) : null}
-          <div className="rounded-lg border border-white/[0.12] bg-white/[0.05] p-6">
+          <div className="min-w-0 rounded-lg border border-white/[0.12] bg-white/[0.05] p-5 sm:p-6">
             <MapPin aria-hidden="true" className="mb-8 text-accent" size={24} />
             <p className="text-sm text-white/[0.54]">Cím</p>
-            <p className="mt-2 text-2xl font-semibold leading-tight">{site.address}</p>
+            <p className="mt-2 min-w-0 break-words text-xl font-semibold leading-tight sm:text-2xl">{site.address}</p>
           </div>
-          <div className="rounded-lg border border-white/[0.12] bg-white/[0.05] p-6 sm:col-span-2">
-            <p className="text-sm text-white/[0.54]">Facebook</p>
+          <div className="min-w-0 rounded-lg border border-white/[0.12] bg-white/[0.05] p-0 sm:col-span-2 sm:p-6">
+            <p className="px-4 pt-4 text-sm text-white/[0.54] sm:px-0 sm:pt-0">Facebook</p>
             {site.facebookEmbedUrl ? (
-              <div className="mt-4 overflow-hidden rounded-lg bg-white">
+              <div className="mt-4 overflow-hidden rounded-b-lg bg-white sm:rounded-lg">
                 <iframe
                   title={`${site.name} Facebook bejegyzés`}
-                  src={site.facebookEmbedUrl}
-                  width={500}
+                  src={facebookEmbedUrl(site.facebookEmbedUrl, 350)}
+                  width={350}
                   height={480}
-                  className="h-[480px] w-full border-0"
+                  className="h-[480px] w-[350px] max-w-full border-0"
                   scrolling="no"
                   allowFullScreen
                   allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
