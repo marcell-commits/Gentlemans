@@ -7,6 +7,7 @@ import {
   Clock3,
   ExternalLink,
   Mail,
+  Menu,
   MapPin,
   Phone
 } from "lucide-react";
@@ -63,19 +64,49 @@ function Header({ site }: { site: SiteVariant }) {
   return (
     <header className="absolute left-0 top-0 z-30 w-full text-white">
       <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-5 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-4">
-          <a href="#" className="max-w-[52vw] text-sm font-semibold leading-tight tracking-wide sm:max-w-none sm:text-base">
+        <div className="flex items-center justify-between gap-3">
+          <a href="#" className="max-w-[58vw] text-sm font-semibold leading-tight tracking-wide sm:max-w-none sm:text-base">
             Gentleman's Club
           </a>
-          <a
-            href={site.bookingLink}
-            className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-lg bg-white px-4 text-sm font-semibold text-ink shadow-soft transition hover:bg-accent focus:outline-none focus:ring-2 focus:ring-white/80"
-          >
-            <CalendarDays aria-hidden="true" size={17} />
-            Időpontfoglalás
-          </a>
+          <div className="flex items-center gap-2">
+            <a
+              href={site.bookingLink}
+              className="hidden min-h-11 shrink-0 items-center justify-center gap-2 rounded-lg bg-white px-4 text-sm font-semibold text-ink shadow-soft transition hover:bg-accent focus:outline-none focus:ring-2 focus:ring-white/80 md:inline-flex"
+            >
+              <CalendarDays aria-hidden="true" size={17} />
+              Időpontfoglalás
+            </a>
+            <details className="group relative md:hidden">
+              <summary
+                aria-label="Menü megnyitása"
+                className="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-lg border border-white/25 bg-white/10 text-white backdrop-blur transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/80 [&::-webkit-details-marker]:hidden"
+              >
+                <Menu aria-hidden="true" size={23} strokeWidth={2.4} />
+              </summary>
+              <div className="absolute right-0 z-40 mt-3 w-[min(82vw,292px)] overflow-hidden rounded-lg border border-white/20 bg-ink/95 p-2 shadow-[0_22px_60px_rgba(0,0,0,0.45)] backdrop-blur">
+                <nav aria-label="Mobil navigáció" className="grid gap-1">
+                  {navItems.map((item) => (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      className="rounded-md px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/60"
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                  <a
+                    href={site.bookingLink}
+                    className="mt-1 inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-accent px-4 text-sm font-bold text-ink transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-white/70"
+                  >
+                    <CalendarDays aria-hidden="true" size={17} />
+                    Időpontfoglalás
+                  </a>
+                </nav>
+              </div>
+            </details>
+          </div>
         </div>
-        <nav aria-label="Fő navigáció" className="flex gap-2 overflow-x-auto pb-1 md:gap-3">
+        <nav aria-label="Fő navigáció" className="hidden gap-2 overflow-x-auto pb-1 md:flex md:gap-3">
           {navItems.map((item) => (
             <a
               key={item.href}
