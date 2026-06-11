@@ -1,10 +1,8 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import {
-  ArrowRight,
   CalendarDays,
   CheckCircle2,
-  Clock3,
   ExternalLink,
   Mail,
   Menu,
@@ -62,7 +60,6 @@ export function ClientSite({ site }: Props) {
       <WhyUs site={site} />
       <MapSection site={site} />
       <Contact site={site} telHref={telHref} />
-      <BookingCta site={site} />
       <Footer site={site} />
     </main>
   );
@@ -341,6 +338,13 @@ function Contact({ site, telHref }: { site: SiteVariant; telHref: string }) {
           <p className="mt-6 text-lg leading-8 text-white/70">
             Az online foglalási rendszerben néhány kattintással kiválaszthatod a számodra megfelelő szolgáltatást és időpontot.
           </p>
+          <a
+            href={site.bookingLink}
+            className="mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-accent px-5 text-sm font-bold text-ink transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-white/80"
+          >
+            <CalendarDays aria-hidden="true" size={18} />
+            Időpontfoglalás
+          </a>
         </div>
         <div className="grid min-w-0 gap-4 sm:grid-cols-2">
           <a
@@ -398,29 +402,6 @@ function Contact({ site, telHref }: { site: SiteVariant; telHref: string }) {
             )}
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
-
-function BookingCta({ site }: { site: SiteVariant }) {
-  return (
-    <section id="foglalas" className="px-5 py-16 sm:px-6 md:py-20 lg:px-8">
-      <div className="mx-auto grid max-w-7xl gap-8 rounded-lg bg-brand p-6 text-white md:grid-cols-[1fr_auto] md:items-center md:p-10">
-        <div>
-          <p className="flex items-center gap-2 text-sm font-semibold text-white/[0.72]">
-            <Clock3 aria-hidden="true" size={17} />
-            Online időpontfoglalás
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold leading-tight md:text-5xl">Foglalj időpontot még ma!</h2>
-        </div>
-        <a
-          href={site.bookingLink}
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-white px-5 text-sm font-bold text-ink transition hover:bg-accent focus:outline-none focus:ring-2 focus:ring-white/80"
-        >
-          Időpontfoglalás
-          <ArrowRight aria-hidden="true" size={18} />
-        </a>
       </div>
     </section>
   );
